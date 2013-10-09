@@ -3,7 +3,7 @@ Spring MVC - Freemarker + Wro4j
 
 Simple example of SpringMVC project that uses [FreeMarker](http://freemarker.org/) template engine with [wro4j-maven-plugin](http://code.google.com/p/wro4j/wiki/MavenPlugin). Automatically compiles less files and minifies css and js files.
 
-Parent project: [spring-mvc-examples](../)
+Parent project: [spring-mvc-examples](../../../)
 
 Donation
 --------

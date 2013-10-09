@@ -3,7 +3,7 @@ Spring MVC - Freemarker
 
 Simple example of SpringMVC project that uses [Thymeleaf](http://www.thymeleaf.org/) template engine.
 
-Parent project: [spring-mvc-examples](../)
+Parent project: [spring-mvc-examples](../../../)
 
 Donation
 --------

@@ -3,7 +3,7 @@ Spring MVC - shared controllers
 
 This project contains controllers shared between other war-modules.
 
-Parent project: [spring-mvc-examples](../)
+Parent project: [spring-mvc-examples](../../../)
 
 Donation
 --------

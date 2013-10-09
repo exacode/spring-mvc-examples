@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Injects into view context {@link UrlInfo}.
+ * Injects into view context an instance of {@link UrlInfo}.
  * 
  * @author mendlik
  * 

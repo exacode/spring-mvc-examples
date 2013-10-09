@@ -1,13 +1,13 @@
-<groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
 
-	<group name="application-ie7">
+	<group name="application-ie8">
 		<css>/lib/font-awesome/less/font-awesome-ie7.less</css>
 		<js>/lib/html5shiv.js</js>
 		<js>/lib/respond.js</js>
 	</group>
 
-	<group name="application-base">
+	<group name="application-base" >
 		<js>/lib/jquery.js</js>
 		<js>/lib/bootstrap/js/affix.js</js>
 		<js>/lib/bootstrap/js/alert.js</js>
@@ -16,20 +16,23 @@
 		<js>/lib/bootstrap/js/collapse.js</js>
 		<js>/lib/bootstrap/js/dropdown.js</js>
 		<js>/lib/bootstrap/js/modal.js</js>
+		<js>/lib/bootstrap/js/tooltip.js</js>
 		<js>/lib/bootstrap/js/popover.js</js>
 		<js>/lib/bootstrap/js/scrollspy.js</js>
 		<js>/lib/bootstrap/js/tab.js</js>
-		<js>/lib/bootstrap/js/tooltip.js</js>
-		<js>/lib/bootstrap/js/transition.js</js>
 		<js>/lib/holder.js</js>
 		<js>/js/application.js</js>
 	</group>
- 
+
 	<group name="application-development">
 		<group-ref>application-base</group-ref>
 		<css>/less/application-development.less</css>
 	</group>
-
+	
+	<group name="application-test">
+		<group-ref>application-development</group-ref>
+	</group>
+	
 	<group name="application-production">
 		<group-ref>application-base</group-ref>
 		<css>/less/application-production.less</css>

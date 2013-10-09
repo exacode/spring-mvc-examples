@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>spring-mvc-freemarker-wro4j</artifactId>
 	<packaging>war</packaging>
-	
+
 	<name>Spring MVC with Freemarker and wro4j</name>
 	<description>Example project of Spring MVC with Freemarker template engine and wro4j</description>
 
@@ -27,6 +27,47 @@
 			<artifactId>freemarker</artifactId>
 			<version>2.3.20</version>
 		</dependency>
+		<dependency>
+			<groupId>ro.isdc.wro4j</groupId>
+			<artifactId>wro4j-extensions</artifactId>
+			<version>1.7.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.sommeri</groupId>
+			<artifactId>less4j</artifactId>
+			<version>1.2.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>ro.isdc.wro4j</groupId>
+				<artifactId>wro4j-maven-plugin</artifactId>
+				<version>1.7.1</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<targetGroups>application-ie8,application-${environment}</targetGroups>
+					<minimize>true</minimize>
+					<cssDestinationFolder>${basedir}/src/main/webapp/resources/wro4j/css/</cssDestinationFolder>
+					<jsDestinationFolder>${basedir}/src/main/webapp/resources/wro4j/js/</jsDestinationFolder>
+					<contextFolder>${basedir}/src/main/wro4j/</contextFolder>
+					<wroFile>${basedir}/src/main/wro4j/wro.xml</wroFile>
+					<extraConfigFile>${basedir}/src/main/wro4j/wro.properties</extraConfigFile>
+					<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+					<ignoreMissingResources>false</ignoreMissingResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

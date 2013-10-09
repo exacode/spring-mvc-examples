@@ -4,12 +4,12 @@
 
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
-        <location>/error/general</location>
+        <location>/error/500</location>
     </error-page>
     
     <error-page>
         <error-code>500</error-code>
-        <location>/error/general</location>
+        <location>/error/500</location>
     </error-page>
     
     <error-page>

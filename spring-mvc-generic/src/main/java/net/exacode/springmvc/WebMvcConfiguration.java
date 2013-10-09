@@ -1,11 +1,14 @@
 package net.exacode.springmvc;
 
+import net.exacode.springmvc.util.iterceptor.EnvironmentInterceptor;
 import net.exacode.springmvc.util.iterceptor.UrlInterceptor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.joda.JodaDateTimeFormatAnnotationFormatterFactory;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -25,6 +28,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 @ComponentScan(basePackageClasses = WebMvcConfiguration.class)
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
+
+	@Autowired
+	private Environment environment;
 
 	/**
 	 * Represents application environment profiles.
@@ -79,6 +85,8 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new UrlInterceptor());
+		registry.addInterceptor(new EnvironmentInterceptor(environment
+				.getActiveProfiles()[0]));
 	}
 
 	@Override

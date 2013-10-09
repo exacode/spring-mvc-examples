@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head> 
+	<meta charset="utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+	<title th:text="#{application.title}">Exacode</title> 
+
+	<!-- Twitter bootstrap - Latest compiled and minified CSS and optional theme -->
+	<link th:href="@{/resources/css/bootstrap.min.css}" href="../../../resources/css/bootstrap.min.css" rel="stylesheet"></link>
+	<link th:href="@{/resources/css/bootstrap-theme.min.css}" href="../../../resources/css/bootstrap-theme.min.css" rel="stylesheet"></link>
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script th:src="@{/resources/js/html5shiv.js}" src="../../../resources/js/html5shiv.js"></script>
+		<script th:src="@{/resources/js/respond.min.js}" src="../../../resources/js/respond.min.js"></script>
+	<![endif]-->
+	
+	<link th:href="@{/resources/css/application.css}" href="../../../resources/css/application.css" rel="stylesheet"></link>
+	<link th:href="@{/resources/img/favicon.png}" href="../../../resources/img/favicon.png" rel="shortcut icon"></link>
+</head>
+<body>
+	<div th:substituteby="layout/navbar :: navbar"></div>
+	<div class="container">
+		<div class="jumbotron"> 
+			<h1 th:text="#{home.title}">Hello world!</h1>
+			<p th:text="#{home.description}">Description</p>
+			<p><a class="btn btn-primary btn-lg" href="https://github.com/mendlik/spring-mvc-examples" th:text="#{home.gitHubLink}">Learn more</a></p>
+		</div>
+		<dl class="dl-horizontal" th:with="now=${#dates.createNow()}, df=#{format.dateTime}">
+			<dt th:text="#{home.currentTemplateEngine}">Current template engine</dt>
+			<dd><a href="http://www.thymeleaf.org/">Thymeleaf</a></dd>
+			<dt th:text="#{home.currentTimestamp}">Current time</dt>
+			<dd th:text="${#dates.format(now, df)}">10/8/13 10:58 PM</dd>
+		</dl>
+		<div class="text-center">
+			<img th:src="@{'/resources/img/logo.png'}" />
+		</div>
+	</div>
+	<div th:substituteby="layout/footer :: footer"></div>
+	
+	<!-- Titter Bootstrap - Compiled and minified JavaScript -->
+	<script th:src="@{/resources/js/jquery.min.js}" src="../../../resources/js/jquery.min.js"></script>
+	<script th:src="@{/resources/js/bootstrap.min.js}" src="../../../resources/js/bootstrap.min.js"></script>
+</body>
+</html>

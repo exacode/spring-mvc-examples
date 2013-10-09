@@ -1,0 +1,23 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<header th:fragment="navbar" class="navbar navbar-inverse navbar-fixed-top" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button> 
+				<a th:href="@{/}" class="navbar-brand" th:text="#{navbar.brand}">Exacode</a>
+			</div>
+			<nav class="collapse navbar-collapse" role="navigation">
+				<ul class="nav navbar-nav">
+					<li class="${(urlInfo.servletPath=='/register') ? 'active'}"><a th:href="@{/register}" th:text="#{navbar.register}">Register</a></li>
+				</ul>
+			</nav>
+		</div> 
+	</header>   
+</body>
+</html>

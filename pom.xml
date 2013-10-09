@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.exacode.springmvc</groupId>
+	<artifactId>spring-mvc-examples</artifactId>
+	<name>spring-mvc-examples</name>
+	<packaging>pom</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+
+		<!-- Dependency versions -->
+		<version.logback>1.0.13</version.logback>
+		<version.slf4j>1.7.5</version.slf4j>
+		<version.spring>3.2.2.RELEASE</version.spring>
+		<version.cglib>2.2.2</version.cglib>
+		<version.joda-time>2.2</version.joda-time>
+		<version.servlet-api>3.0.1</version.servlet-api>
+		<version.cglib>2.2.2</version.cglib>
+		<!-- Hibernate validator 5.0 breaks its SPIs in a non-backwards-compatible. Stay with 4.3.0 version until Spring 4.0. See: https://jira.springsource.org/browse/SPR-10466 -->
+		<version.hibernate-validator>4.3.1.Final</version.hibernate-validator>
+		<version.validation-api>1.0.0.GA</version.validation-api>
+
+		<!-- Test dependency versions -->
+		<version.junit>4.10</version.junit>
+
+		<!-- Environment profile - set by property -->
+		<!-- Available profiles: development, production, test -->
+		<environment>development</environment>
+	</properties>
+
+	<modules>
+		<module>spring-mvc-generic</module>
+		<module>spring-mvc-thymeleaf</module>
+		<module>spring-mvc-freemarker</module>
+		<module>spring-mvc-freemarker-wro4j</module>
+	</modules>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+</project>

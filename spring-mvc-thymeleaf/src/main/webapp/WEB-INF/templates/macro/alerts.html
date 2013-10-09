@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div th:fragment="alerts" class="alerts" th:if="${alerts}">
+		<div class="error-messages" th:if="${not #lists.isEmpty(alerts.errors)}" th:with="alertMsgs=${alerts.errors},type='danger'">
+			<div th:substituteby="macro/alerts :: alert-list"  />
+		</div>
+		<div class="warning-messages" th:if="${not #lists.isEmpty(alerts.warnings)}" th:with="alertMsgs=${alerts.warnings},type='warning'">
+			<div th:substituteby="macro/alerts :: alert-list" />
+		</div>
+		<div class="info-messages" th:if="${not #lists.isEmpty(alerts.infos)}" th:with="alertMsgs=${alerts.infos},type='info'">
+			<div th:substituteby="macro/alerts :: alert-list"/>
+		</div>
+		<div class="success-messages" th:if="${not #lists.isEmpty(alerts.successes)}" th:with="alertMsgs=${alerts.successes},type='success'">
+			<div th:substituteby="macro/alerts :: alert-list" />
+		</div>
+	</div>
+	
+	<div th:fragment="alert-list">
+		<div class="message-list" th:each="alertMsg : ${alertMsgs}"> 
+			<div class="alert alert-dismissable" th:classappend="' alert-' + ${type}">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<p th:text="${#messages.msgWithParams(alertMsg.code, alertMsg.arguments)}">Message</p>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

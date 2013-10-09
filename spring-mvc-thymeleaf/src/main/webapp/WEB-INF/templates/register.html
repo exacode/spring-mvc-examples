@@ -1,0 +1,87 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head> 
+	<meta charset="utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+	<title th:text="#{application.title}">Exacode</title> 
+
+	<!-- Twitter bootstrap - Latest compiled and minified CSS and optional theme -->
+	<link th:href="@{/resources/css/bootstrap.min.css}" href="../../../resources/css/bootstrap.min.css" rel="stylesheet"></link>
+	<link th:href="@{/resources/css/bootstrap-theme.min.css}" href="../../../resources/css/bootstrap-theme.min.css" rel="stylesheet"></link>
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script th:src="@{/resources/js/html5shiv.js}" src="../../../resources/js/html5shiv.js"></script>
+		<script th:src="@{/resources/js/respond.min.js}" src="../../../resources/js/respond.min.js"></script>
+	<![endif]-->
+	
+	<link th:href="@{/resources/css/application.css}" href="../../../resources/css/application.css" rel="stylesheet"></link>
+	<link th:href="@{/resources/img/favicon.png}" href="../../../resources/img/favicon.png" rel="shortcut icon"></link>
+</head>
+<body>
+	<div th:substituteby="layout/navbar :: navbar"></div>
+	<div class="container">
+		<div class="page-header">
+			<h1><span th:text="#{registration.title}">Registration</span> <small th:text="#{registration.subtitle}">Subtitle</small></h1>
+		</div>
+
+		<h2 th:text="#{registration.validation.title}">Validation rules</h2>
+		<ul>
+			<li th:utext="#{registration.validation.email.regex}">Rule #1</li>
+			<li th:utext="#{registration.validation.email.forbidden}">Rule #2</li>
+			<li th:utext="#{registration.validation.password.length}">Rule #3</li>
+			<li th:utext="#{registration.validation.password.duplicate}">Rule #4</li>
+		</ul>
+		
+		<h2 th:text="#{registration.form.title}">Registration form</h2>
+		<form class="well form-horizontal" th:action="@{/register}" method="post" th:object="${registrationForm}">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('email')} ? ' has-error '"> 
+					<label class="col-lg-2 control-label" for="email" th:text="#{registration.email.label}">Email:</label>
+					<div class="col-lg-10">
+						<input class="form-control" type="text" th:field="*{email}" th:placeholder="#{registration.email.placeholder}" /> 
+						<span
+							class="help-block" th:if="${#fields.hasErrors('email')}"
+							th:errors="*{email}">Incorrect input</span>
+					</div>
+				</div>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('password')} ? ' has-error '"> 
+					<label class="col-lg-2 control-label" for="password" th:text="#{registration.password.label}">Email:</label>
+					<div class="col-lg-10">
+						<input class="form-control" type="password" th:field="*{password}" th:placeholder="#{registration.password.placeholder}" /> 
+						<span
+							class="help-block" th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}">Incorrect input</span>
+					</div>
+				</div>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('repeatedPassword')} ? ' has-error '"> 
+					<label class="col-lg-2 control-label" for="repeatedPassword" th:text="#{registration.repeatedPassword.label}">Email:</label>
+					<div class="col-lg-10">
+						<input class="form-control" type="password" th:field="*{repeatedPassword}" th:placeholder="#{registration.repeatedPassword.placeholder}" /> 
+						<span class="help-block" th:if="${#fields.hasErrors('repeatedPassword')}"
+							th:errors="*{repeatedPassword}">Incorrect input</span>
+					</div>
+				</div>
+				<div class="form-group" th:if="${alerts}">
+					<div class="col-lg-offset-2 col-lg-8">
+						<div th:substituteby="macro/alerts :: alerts" th:with="alerts=${alerts}"/>
+					</div>
+				</div> 
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-4">
+						<button type="submit" class="btn btn-primary" th:text="#{registration.submit}">Register</button>
+					</div>
+				</div>
+			</form>
+	</div>
+	<div th:substituteby="layout/footer :: footer"></div>
+	
+	<!-- Titter Bootstrap - Compiled and minified JavaScript -->
+	<script th:src="@{/resources/js/jquery.min.js}" src="../../../resources/js/jquery.min.js"></script>
+	<script th:src="@{/resources/js/bootstrap.min.js}" src="../../../resources/js/bootstrap.min.js"></script>
+</body>
+</html>

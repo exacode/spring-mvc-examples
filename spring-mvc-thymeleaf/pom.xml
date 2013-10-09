@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>spring-mvc-thymeleaf</artifactId>
+	<packaging>war</packaging>
+
+	<name>Spring MVC with Thymeleaf</name>
+	<description>Example project of Spring MVC with Thymeleaf template engine</description>
+
+	<parent>
+		<groupId>net.exacode.springmvc</groupId>
+		<artifactId>spring-mvc-examples</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- Template engine -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>spring-mvc-generic</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- Template engine dependencies -->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring3</artifactId>
+			<version>2.0.18</version>
+		</dependency>
+	</dependencies>
+
+</project>

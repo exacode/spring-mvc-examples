@@ -18,7 +18,8 @@ TODO
 ----
 - Add Velocity project
 - Add JSP project
-... any volounters???
+
+... any volunteers???
 
 Donation
 --------

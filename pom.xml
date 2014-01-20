@@ -37,6 +37,7 @@
 		<module>spring-mvc-thymeleaf</module>
 		<module>spring-mvc-freemarker</module>
 		<module>spring-mvc-freemarker-wro4j</module>
+		<module>spring-mvc-freemarker-gruntjs</module>
 	</modules>
 
 	<build>

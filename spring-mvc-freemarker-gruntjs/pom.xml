@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>spring-mvc-freemarker-gruntjs</artifactId>
+	<packaging>war</packaging>
+
+	<name>Spring MVC with Freemarker and gruntjs</name>
+	<description>Example project of Spring MVC with Freemarker template engine and gruntjs</description>
+
+	<parent>
+		<groupId>net.exacode.springmvc</groupId>
+		<artifactId>spring-mvc-examples</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<properties>
+		<grunt.command>grunt</grunt.command>
+	</properties>
+
+	<dependencies>
+		<!-- Template engine -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>spring-mvc-generic</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- Template engine -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<!-- Install dependencies -->
+							<executable>npm install</executable><!-- nodejs dependencies -->
+							<executable>bundle install</executable><!-- ruby dependencies -->
+							<executable>bower install</executable><!-- bower dependencies -->
+							<!-- Build web application resources -->
+							<executable>${grunt.command}</executable>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>profile-ui-production</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>production</value>
+				</property>
+			</activation>
+			<properties>
+				<grunt.command>grunt optimized</grunt.command>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>

@@ -1,7 +1,11 @@
 target
+node_modules
 .settings
 .checkstyle
 .classpath
 .fbprefs
 .pmd
 .project
+*.sublime-project
+*.sublime-workspace
+Gemfile.lock

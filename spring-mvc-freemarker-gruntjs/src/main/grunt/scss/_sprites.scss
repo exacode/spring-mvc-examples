@@ -1,0 +1,7 @@
+// Customizations: http://compass-style.org/help/tutorials/spriting/customization-options/
+$icons-sprite-dimensions: true;
+
+// Imports
+@import "compass/utilities/sprites";
+@import "icons/*.png";
+@include all-icons-sprites;

@@ -1,4 +1,4 @@
-<@layout.page ngApp="/modules/home/index.js">
+<@layout.page ngApp="home">
 	<div class="container">
 		<div class="jumbotron"> 
 			<h1>${fmsg('home.title')}</h1>
@@ -15,5 +15,10 @@
 			<img src="${furl('/assets/img/logo.png')}" />
 		</div>
 		<p>Nothing here {{'yet' + '!'}}</p>
+		<p ng-controller="HomeCtrl">
+		Random: {{ random }}
+		<br/>
+		2 * 2 = {{ multiply(2, 2) }}
+		</p>
 	</div>
 </@layout.page>

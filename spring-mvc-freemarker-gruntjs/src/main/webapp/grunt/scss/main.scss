@@ -1,0 +1,24 @@
+@import "_variables.scss";
+
+// Twitter Bootstrap
+@import "_twitter_bootstrap_overrides.scss";
+@import "sass-bootstrap/lib/bootstrap.scss";
+// Font Awesome
+@import "_font_awesome_overrides.scss";
+@import "font-awesome/scss/font-awesome.scss";
+
+@import "_sprites.scss";
+@import "fonts/_fonts.scss";
+
+body {
+	padding-top: 60px;
+}
+
+body > footer {
+	padding-top: 40px;
+	padding-bottom: 30px;
+	margin-top: 100px;
+	color: #777;
+	text-align: center;
+	border-top: 1px solid #e5e5e5;
+}

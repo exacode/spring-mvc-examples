@@ -7,6 +7,8 @@ module.exports = function (grunt) {
 	// load all grunt tasks
 	require('load-grunt-tasks')(grunt);
 
+	var requireJsConfig = require('./src/main/grunt/js/main/config.js');
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		// Simple file banner
@@ -210,61 +212,49 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		watch: {
-			resources: {
-				files: [
-					'<%= app.dir.src %>/img/**/*.*',
-					'<%= app.dir.src %>/fonts/**/*.*'
-				],
-				tasks: ['dist-resources-fast']
-			},
-			sass: {
-				files: ['<%= app.dir.src %>/sass/**/*.{scss,sass}'],
-				tasks: ['dist-css-fast']
-			},
-			js: {
-				files: ['<%= app.dir.src %>/js/**/*.js'],
-				tasks: ['dist-js-fast']
-			}
-		},
 		requirejs: {
-			compile: {
+			options: {
+				baseUrl: './',
+				appDir: '<%= app.dir.src %>/js/main',
+				dir: '<%= app.dir.dist %>/js',
+				shim: requireJsConfig.shim,
+				paths: requireJsConfig.paths,
+				modules: [
+					{
+						name: 'basic',
+						create: true,
+						include: [
+							'jquery',
+							'bootstrap'
+						]
+					},
+					{
+						name: 'common',
+						create: true,
+						include: [
+							'domReady',
+							'angular',
+							'underscore'
+						]
+					},
+					{
+						name: 'modules/home/loader',
+						exclude: ['common']
+					}
+					//,{
+					//	name: 'modules/other',
+					//	exclude: ['../common']
+					//}
+				]
+			},
+			dev: {
 				options: {
-					baseUrl: './',
-					appDir: '<%= app.dir.src %>/js/main',
-					mainConfigFile: '<%= app.dir.src %>/js/main/config-loader.js',
-					dir: '<%= app.dir.dist %>/js',
-					findNestedDependencies: true,
-					optimize: 'none',
-					shim: require('./src/main/grunt/js/main/config.js').shim,
-					paths: require('./src/main/grunt/js/main/config.js').paths,
-					modules: [
-						{
-							name: 'basic',
-							create: true,
-							include: [
-								'jquery',
-								'bootstrap'
-							]
-						},
-						{
-							name: 'common',
-							create: true,
-							include: [
-								'config-loader',
-								'angular',
-								'underscore'
-							]
-						},
-						{
-							name: 'modules/home/index',
-							exclude: ['common']
-						}
-						// ,{
-						// 	name: 'modules/other',
-						// 	exclude: ['../common']
-						// }
-					]
+					optimize: 'none'
+				}
+			},
+			prod: {
+				options: {
+					optimize: 'uglify'
 				}
 			}
 		},
@@ -290,17 +280,45 @@ module.exports = function (grunt) {
 				autoWatch : true,
 				singleRun : false
 			}
+		},
+		watch: {
+			resources: {
+				files: [
+					'<%= app.dir.src %>/img/**/*.*',
+					'<%= app.dir.src %>/fonts/**/*.*'
+				],
+				tasks: ['resources-dev']
+			},
+			css: {
+				files: [
+					'<%= app.dir.src %>/scss/**/*.{scss,sass}',
+					'<%= app.dir.src %>/css/**/*.css'
+				],
+				tasks: ['css-dev']
+			},
+			js: {
+				files: [
+					'<%= app.dir.src %>/js/main/**/*.js',
+					'<%= app.dir.src %>/js/*.js'
+				],
+				tasks: ['js-dev']
+			}
 		}
+	});
+	// Log 'watch' events
+	grunt.event.on('watch', function(action, filepath, target) {
+		grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
 	});
 
 	// Distribution - JavaScript
 	grunt.registerTask('js-test', ['jshint', 'karma:phantom']);
-	grunt.registerTask('js-dev', ['requirejs', 'copy:js-libs']);
+	grunt.registerTask('js-dev', ['requirejs:dev', 'copy:js-libs']);
 	grunt.registerTask('js-prod', [
-		'test-js',		// run tests
-		'requirejs',	// build optimized requirejs modules
+		'js-test',		// run tests
+		'requirejs:prod',	// build optimized requirejs modules
 		'uglify:libs',	// concatenate and uglify additiona libs
 	]);
+
 
 	// Distribution - CSS
 	grunt.registerTask('css-dev', ['compass:dev', 'concat:css-dev', 'autoprefixer']);
@@ -323,6 +341,9 @@ module.exports = function (grunt) {
 	// Build
 	grunt.registerTask('build-prod', ['css-prod', 'resources-prod', 'js-prod']);
 	grunt.registerTask('build-dev', ['css-dev', 'resources-dev', 'js-dev']);
+
+	// Development
+	grunt.registerTask('dev', ['watch']);
 
 	// Default task.
 	grunt.registerTask('default', ['clean', 'build-prod']);

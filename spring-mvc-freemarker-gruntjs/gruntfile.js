@@ -93,6 +93,10 @@ module.exports = function (grunt) {
 			build: {
 				src: ['<%= app.dir.dist %>/js/main.js'],
 				dest: '<%= app.dir.dist %>/js/main.min.js'
+			},
+			libs: {
+				src: ['<%= app.dir.lib %>/requirejs/require.js'],
+				dest: '<%= app.dir.dist %>/js/require.js'
 			}
 		},
 		imagemin: {
@@ -122,7 +126,7 @@ module.exports = function (grunt) {
 					flatten: true,
 					dest: '<%= app.dir.dist %>/img',
 					src: [
-							// add some images to copy
+						// add some images to copy
 					]
 				}]
 			},
@@ -131,7 +135,9 @@ module.exports = function (grunt) {
 					expand: true,
 					cwd: '<%= app.dir.src %>',
 					dest: '<%= app.dir.dist %>',
-					src: [ 'img/**/*.*']
+					src: [
+						'img/**/*.*'
+					]
 				}]
 			},
 			fonts: {
@@ -144,8 +150,16 @@ module.exports = function (grunt) {
 					expand: true,
 					cwd: '<%= app.dir.src %>/fonts',
 					dest: '<%= app.dir.dist %>/fonts',
-					src: ['**/*.*']
+					src: [
+						'**/*.*'
+					]
 				}]
+			},
+			'js-libs': {
+				expand: true,
+				flatten: true,
+				src: ['<%= app.dir.lib %>/requirejs/require.js'],
+				dest: '<%= app.dir.dist %>/js'
 			}
 		},
 		autoprefixer: {
@@ -230,8 +244,7 @@ module.exports = function (grunt) {
 							create: true,
 							include: [
 								'jquery',
-								'bootstrap',
-								'underscore'
+								'bootstrap'
 							]
 						},
 						{
@@ -239,8 +252,8 @@ module.exports = function (grunt) {
 							create: true,
 							include: [
 								'config-loader',
-								'require',
-								'angular'
+								'angular',
+								'underscore'
 							]
 						},
 						{
@@ -282,11 +295,11 @@ module.exports = function (grunt) {
 
 	// Distribution - JavaScript
 	grunt.registerTask('js-test', ['jshint', 'karma:phantom']);
-	grunt.registerTask('js-dev', ['concat:js_fast']);
+	grunt.registerTask('js-dev', ['requirejs', 'copy:js-libs']);
 	grunt.registerTask('js-prod', [
 		'test-js',		// run tests
-		'concat:js',	// concatenate js files
-		'uglify'		// uglify files
+		'requirejs',	// build optimized requirejs modules
+		'uglify:libs',	// concatenate and uglify additiona libs
 	]);
 
 	// Distribution - CSS

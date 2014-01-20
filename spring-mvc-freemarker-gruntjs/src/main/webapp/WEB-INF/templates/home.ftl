@@ -1,4 +1,4 @@
-<@layout.page ngApp="/modules/home/index">
+<@layout.page ngApp="/modules/home/index.js">
 	<div class="container">
 		<div class="jumbotron"> 
 			<h1>${fmsg('home.title')}</h1>

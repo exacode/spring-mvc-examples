@@ -2,7 +2,7 @@
 <#macro page title="" view="" ngApp="">
 	<#setting locale="${fmsg('application.locale')}">
 	<!DOCTYPE html>
-	<html lang="${fmsg('application.locale')}">
+	<html lang="${fmsg('application.locale')}" ng-app="HomeApp">
 		<head> 
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,21 @@
 			<#nested>
 			<#include "/layout/footer.ftl">
 			
-
-			<script src="${furl('/assets/js/basic.js')}"></script>
 			<#if ngApp?has_content>
 				<script src="${furl('/assets/js/require.js')}"></script>
 				<script>
-					require(["${furl('/assets/js/common.js')}"], function (common) {
-		                require(["${ngApp}"]);
+					require([
+						'require',
+						"${furl('/assets/js/basic.js')}", 
+						"${furl('/assets/js/common.js')}"
+					], function (require) {
+		                require(["${furl('/assets/js${ngApp}')}"]);
 		            });
+	            </script>
+	        <#else>
+	        	<script src="${furl('/assets/js/require.js')}"></script>
+				<script>
+					require(["${furl('/assets/js/basic.js')}"]);
 	            </script>
             </#if>
 		</body>

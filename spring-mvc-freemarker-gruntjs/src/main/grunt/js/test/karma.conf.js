@@ -2,42 +2,41 @@
 module.exports = function (config) {
 	'use strict';
 
-	var project = {
-		lib: '../lib'
-	};
-
 	config.set({
 
 		files: [
-			'tests.js',
 			{
-				pattern: project.lib + '/jasmine-matchers/dist/jasmine-matchers.js',
+				pattern: 'lib/jasmine-matchers/dist/jasmine-matchers.js',
 				included: true
 			},
 			{
-				pattern: '/**/*.js',
+				pattern: 'js/main/**/*.js',
 				included: false
 			},
 			{
-				pattern: '/**/*.map',
+				pattern: 'js/main/**/*.map',
 				included: false
 			},
 			{
-				pattern: project.lib + '/**/*.js',
+				pattern: 'js/test/**/*.spec.js',
 				included: false
 			},
 			{
-				pattern: project.lib + '/**/*.map',
+				pattern: 'lib/**/*.js',
 				included: false
 			},
+			{
+				pattern: 'lib/**/*.map',
+				included: false
+			},
+			'js/test/tests.js'
 		],
 
 		exclude: [
-			project.lib + '/**/*spec.js'
+			
 		],
 
 		browsers:['PhantomJS'], // Chrome, ChromeCanary, Firefox, IE (only Windows), Opera, PhantomJS, Safari (only Mac)
-
 		reporters: ['dots'],
 
 
@@ -46,10 +45,9 @@ module.exports = function (config) {
 		colors: true,
 		frameworks: ['jasmine', 'requirejs'],
 		logLevel: config.LOG_INFO,
-		autoWatch: false,
 		captureTimeout: 60000,
-		singleRun: false,
 		reportSlowerThan: 500,
-		basePath: './'
+		basePath: '../../',
+		singleRun: true
 	});
 };

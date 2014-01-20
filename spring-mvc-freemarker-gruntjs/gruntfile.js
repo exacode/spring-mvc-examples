@@ -224,7 +224,7 @@ module.exports = function (grunt) {
 		},
 		karma: {
       ci: {
-        configFile: '<%= app.dir.src %>/js/.karma-phantom.conf.js',
+        configFile: '<%= app.dir.src %>/js/test/karma.conf.js',
         browsers  : ['PhantomJS'],
         singleRun : true
       },

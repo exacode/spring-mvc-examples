@@ -8,7 +8,7 @@ define([
 ], function (ng) {
 	'use strict';
 
-	return ng.module('app', [
+	return ng.module('application', [
 		'HomeApp',
 	]);
 });

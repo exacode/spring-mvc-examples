@@ -1,6 +1,6 @@
 define([
 	'angular-mocks',
-	'./home-ctrl'
+	'MAIN/modules/home/home-ctrl'
 ], function () {
 	'use strict';
 
@@ -33,6 +33,12 @@ define([
 		describe('check custom jasmine matchers enabled', function () {
 			it('should check that toBeArrayOfSize(int) exists', function () {
 				expect([1, 2, 3]).toBeArrayOfSize(3);
+			});
+		});
+
+		describe('check controller logic', function () {
+			it('should multiply two values', function () {
+				expect(scope.multiply(2, 2)).toBe(4);
 			});
 		});
 

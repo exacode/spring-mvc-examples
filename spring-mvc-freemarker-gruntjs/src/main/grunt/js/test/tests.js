@@ -28,21 +28,21 @@ require(['base/js/main/main'], function (config) {
   'use strict';
 
   // improve config
-  config.baseUrl = '/base/js/main';
+  config.baseUrl = 'base/';
   config.deps = window.tests;
   config.callback = window.__karma__.start;
 
   // // adapt paths to work with built app
-  // for (var i in config.paths) {
-  //   config.paths[i] = config.paths[i].replace('../lib', '/base/lib');
-  // }
+  for (var i in config.paths) {
+    config.paths[i] = config.paths[i].replace('../../lib', './lib');
+  }
 
   // add config for test dependencies
   config.paths['angular-mocks'] = './lib/angular-mocks/angular-mocks';
   config.shim['angular-mocks'] = ['angular'];
 
   // alias
-  //config.paths.Source = '/base/js/main';
+  config.paths.MAIN = './js/main';
 
   // apply config to require
   window.require.config(config);

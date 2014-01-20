@@ -1,5 +1,5 @@
 define(['angular'], function (ng) {
 	'use strict';
 	
-	return ng.module('HomeApp', []);
+	return ng.module('HomeApp',[]);
 });

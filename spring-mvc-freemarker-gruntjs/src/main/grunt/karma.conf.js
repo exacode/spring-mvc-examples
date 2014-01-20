@@ -5,9 +5,18 @@ module.exports = function (config) {
 	config.set({
 
 		files: [
+			'js/test/tests.js',
 			{
 				pattern: 'lib/jasmine-matchers/dist/jasmine-matchers.js',
 				included: true
+			},
+			{
+				pattern: 'js/test/modules/**/*.map',
+				included: false
+			},
+			{
+				pattern: 'js/test/modules/**/*.js',
+				included: false
 			},
 			{
 				pattern: 'js/main/**/*.js',
@@ -18,22 +27,17 @@ module.exports = function (config) {
 				included: false
 			},
 			{
-				pattern: 'js/test/**/*.spec.js',
-				included: false
-			},
-			{
 				pattern: 'lib/**/*.js',
 				included: false
 			},
 			{
 				pattern: 'lib/**/*.map',
 				included: false
-			},
-			'js/test/tests.js'
+			}
 		],
 
 		exclude: [
-			
+			'lib/**/*spec.js'
 		],
 
 		browsers:['PhantomJS'], // Chrome, ChromeCanary, Firefox, IE (only Windows), Opera, PhantomJS, Safari (only Mac)
@@ -47,7 +51,6 @@ module.exports = function (config) {
 		logLevel: config.LOG_INFO,
 		captureTimeout: 60000,
 		reportSlowerThan: 500,
-		basePath: '../../',
 		singleRun: true
 	});
 };

@@ -1,3 +1,3 @@
-define([
-    './home-ctrl'
-], function () {});
+define(['./home-ctrl'], function () {
+	
+});

@@ -9,6 +9,6 @@ define([
 	'use strict';
 
 	return ng.module('application', [
-		'HomeApp',
+		'HomeApp'
 	]);
 });

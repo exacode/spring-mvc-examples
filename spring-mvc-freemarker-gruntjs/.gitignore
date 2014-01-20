@@ -10,3 +10,4 @@ node_modules
 *.sublime-workspace
 Gemfile.lock
 src/main/grunt/lib
+src/main/webapp/assets

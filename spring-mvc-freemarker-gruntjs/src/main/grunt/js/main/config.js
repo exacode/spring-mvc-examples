@@ -7,6 +7,7 @@ define({
 
 	paths: {
 		// Basic module dependencies
+		'require': '../../lib/requirejs/require',
 		'jquery': '../../lib/jquery/jquery',
 		'bootstrap': '../../lib/sass-bootstrap/dist/js/bootstrap',
 		'underscore': '../../lib/underscore/underscore',
@@ -25,6 +26,8 @@ define({
 		'underscore': {
 			exports: '_'
 		},
-	}
+	},
+
+	baseUrl: 'assets/js'
 
 });

@@ -39,7 +39,8 @@ module.exports = function (config) {
 		],
 
 		exclude: [
-			'lib/**/*spec.js'
+			'lib/**/*spec.js',
+			'js/main/config-loader.js'
 		],
 
 		browsers:['PhantomJS'], // Chrome, ChromeCanary, Firefox, IE (only Windows), Opera, PhantomJS, Safari (only Mac)
@@ -53,6 +54,7 @@ module.exports = function (config) {
 		logLevel: config.LOG_INFO,
 		captureTimeout: 60000,
 		reportSlowerThan: 500,
-		singleRun: true
+		singleRun: true,
+		basePath: '../../'
 	});
 };

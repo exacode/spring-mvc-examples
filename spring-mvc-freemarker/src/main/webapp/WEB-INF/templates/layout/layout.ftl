@@ -10,17 +10,17 @@
 			<title>${(title)!fmsg('application.title')}</title> 
 
 			<!-- Twitter bootstrap - Latest compiled and minified CSS and optional theme -->
-			<link href="${furl('/resources/css/bootstrap.min.css')}" rel="stylesheet"/>
-			<link href="${furl('/resources/css/bootstrap-theme.min.css')}" rel="stylesheet">
+			<link href="${furl('/assets/css/bootstrap.min.css')}" rel="stylesheet"/>
+			<link href="${furl('/assets/css/bootstrap-theme.min.css')}" rel="stylesheet">
 			
 			<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 			<!--[if lt IE 9]>
-				<script src="${furl('/resources/js/html5shiv.js')}"></script>
-				<script src="${furl('/resources/js/respond.min.js')}"></script>
+				<script src="${furl('/assets/js/html5shiv.js')}"></script>
+				<script src="${furl('/assets/js/respond.min.js')}"></script>
 			<![endif]-->
 			
-			<link href="${furl('/resources/css/application.css')}" rel="stylesheet" />
-			<link href="${furl('/resources/img/favicon.png')}" rel="shortcut icon" />
+			<link href="${furl('/assets/css/application.css')}" rel="stylesheet" />
+			<link href="${furl('/assets/img/favicon.png')}" rel="shortcut icon" />
 		</head>
 		<body>
 		
@@ -30,8 +30,8 @@
 			<#include "/layout/footer.ftl">
 			
 			<!-- Titter Bootstrap - Latest compiled and minified JavaScript -->
-			<script src="${furl('/resources/js/jquery.min.js')}"></script>
-			<script src="${furl('/resources/js/bootstrap.min.js')}"></script>
+			<script src="${furl('/assets/js/jquery.min.js')}"></script>
+			<script src="${furl('/assets/js/bootstrap.min.js')}"></script>
 		</body>
 	</html>
 </#macro>

@@ -215,10 +215,15 @@ module.exports = function (grunt) {
 		},
 		requirejs: {
 			compile: {
-				options: grunt.util._.merge(require('./src/main/grunt/js/main/config.js'), {
-					baseUrl: '<%= app.dir.src %>/js/main',
+				options: {
+					baseUrl: './',
+					appDir: '<%= app.dir.src %>/js/main',
+					mainConfigFile: '<%= app.dir.src %>/js/main/config-loader.js',
 					dir: '<%= app.dir.dist %>/js',
+					findNestedDependencies: true,
 					optimize: 'none',
+					shim: require('./src/main/grunt/js/main/config.js').shim,
+					paths: require('./src/main/grunt/js/main/config.js').paths,
 					modules: [
 						{
 							name: 'basic',
@@ -233,7 +238,7 @@ module.exports = function (grunt) {
 							name: 'common',
 							create: true,
 							include: [
-								'config',
+								'config-loader',
 								'require',
 								'angular'
 							]
@@ -247,28 +252,27 @@ module.exports = function (grunt) {
 						// 	exclude: ['../common']
 						// }
 					]
-				})
+				}
 			}
 		},
 		karma: {
+			options: {
+				configFile: '<%= app.dir.src %>/js/test/karma.conf.js'
+			},
 			'phantom': {
-				configFile: '<%= app.dir.src %>/karma.conf.js',
 				browsers  : ['PhantomJS'],
 				singleRun : true
 			},
 			'phantom-watch': {
-				configFile: '<%= app.dir.src %>/karma.conf.js',
 				browsers  : ['PhantomJS'],
 				autoWatch : true,
 				singleRun : false
 			},
 			'chrome': {
-				configFile: '<%= app.dir.src %>/karma.conf.js',
 				browsers  : ['Chrome'],
 				singleRun : true
 			},
 			'chrome-watch': {
-				configFile: '<%= app.dir.src %>/karma.conf.js',
 				browsers  : ['Chrome'],
 				autoWatch : true,
 				singleRun : false

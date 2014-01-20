@@ -1,4 +1,4 @@
-<@layout.page>
+<@layout.page ngApp="/modules/home/index">
 	<div class="container">
 		<div class="jumbotron"> 
 			<h1>${fmsg('home.title')}</h1>
@@ -12,7 +12,7 @@
 			<dd>${.now?datetime?string(fmsg('format.dateTime'))}</dd>
 		</dl>
 		<div class="text-center">
-			<img src="${furl('/resources/img/logo.png')}" />
+			<img src="${furl('/assets/img/logo.png')}" />
 		</div>
 		<p>Nothing here {{'yet' + '!'}}</p>
 	</div>

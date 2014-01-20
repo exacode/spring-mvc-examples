@@ -65,8 +65,8 @@ public class ExceptionController {
 	 * When no controller can be matched, logs requested url (for SEO reasons)
 	 * and presents 404 error page.
 	 */
-	@RequestMapping({ "{path:(?!resources|error).*$}",
-			"{path:(?!resources|error).*$}/**" })
+	@RequestMapping({ "{path:(?!assets|error).*$}",
+			"{path:(?!assets|error).*$}/**" })
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public String pageNotFound(Model model, HttpServletRequest request) {
 		String path = request.getRequestURI().substring(

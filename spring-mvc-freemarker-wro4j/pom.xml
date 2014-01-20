@@ -58,8 +58,8 @@
 				<configuration>
 					<targetGroups>application-ie8,application-${environment}</targetGroups>
 					<minimize>true</minimize>
-					<cssDestinationFolder>${basedir}/src/main/webapp/resources/wro4j/css/</cssDestinationFolder>
-					<jsDestinationFolder>${basedir}/src/main/webapp/resources/wro4j/js/</jsDestinationFolder>
+					<cssDestinationFolder>${basedir}/src/main/webapp/assets/wro4j/css/</cssDestinationFolder>
+					<jsDestinationFolder>${basedir}/src/main/webapp/assets/wro4j/js/</jsDestinationFolder>
 					<contextFolder>${basedir}/src/main/wro4j/</contextFolder>
 					<wroFile>${basedir}/src/main/wro4j/wro.xml</wroFile>
 					<extraConfigFile>${basedir}/src/main/wro4j/wro.properties</extraConfigFile>

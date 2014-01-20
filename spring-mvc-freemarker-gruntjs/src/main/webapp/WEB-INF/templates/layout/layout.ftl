@@ -1,5 +1,5 @@
 <#include "/macro/util.ftl">
-<#macro page title="" view="">
+<#macro page title="" view="" ngApp="">
 	<#setting locale="${fmsg('application.locale')}">
 	<!DOCTYPE html>
 	<html lang="${fmsg('application.locale')}">
@@ -13,7 +13,7 @@
 			<!--[if lt IE 9]>
 				<script src="${furl('/assets/js/application-ie8.js')}"></script>
 			<![endif]-->
-			<link href="${furl('/assets/css/application.css')}" rel="stylesheet" />
+			<link href="${furl('/assets/css/main.css')}" rel="stylesheet" />
 			<link href="${furl('/assets/img/favicon.png')}" rel="shortcut icon" />
 		</head>
 		<body>
@@ -23,11 +23,16 @@
 			<#nested>
 			<#include "/layout/footer.ftl">
 			
-			<#if environment='production'>
-				<script src="${furl('/assets/js/require.js')}" data-main="${furl('/resources/js/main.min')}"></script>
-			<#else>
-				<script src="${furl('/assets/js/require.js')}" data-main="${furl('/resources/js/config.js')}"></script>
-			</#if>
+
+			<script src="${furl('/assets/js/basic.js')}"></script>
+			<#if ngApp?has_content>
+				<script src="${furl('/assets/js/require.js')}"></script>
+				<script>
+					require(["${furl('/assets/js/common.js')}"], function (common) {
+		                require(["${ngApp}"]);
+		            });
+	            </script>
+            </#if>
 		</body>
 	</html>
 </#macro>

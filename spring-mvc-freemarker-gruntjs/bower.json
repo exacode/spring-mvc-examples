@@ -7,6 +7,7 @@
 		"font-awesome": "~4.0.3",
 		"modernizr": "~2.6.2",
 		"jquery": "~1.10.2",
+		"underscore": "~1.5.2",
 		"angular": "~1.2.4",
 		"angular-mocks": "~1.2.4",
 		"angular-scenario": "~1.2.4",

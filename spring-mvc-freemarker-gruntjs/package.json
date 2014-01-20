@@ -29,6 +29,7 @@
 		"grunt-contrib-jshint": "~0.7.2",
 		"jshint-stylish": "~0.1.5",
 		"grunt-contrib-requirejs": "~0.4.0",
+		"amdefine": "latest",
 
 		"grunt-karma": "latest",
 		"grunt-protractor-runner": "latest",

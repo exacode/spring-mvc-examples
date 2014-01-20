@@ -24,7 +24,7 @@
   }
 })(this);
 
-require(['base/js/main/main'], function (config) {
+require(['base/js/main/config'], function (config) {
   'use strict';
 
   // improve config

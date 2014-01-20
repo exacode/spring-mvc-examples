@@ -7,6 +7,15 @@ This example contains also probably the most up to date JS technology stack: [Re
 
 Parent project: [spring-mvc-examples](../../../)
 
+Project structure
+https://github.com/StarterSquad/angularjs-requirejs-seed
+https://github.com/requirejs/example-multipage-shim
+http://docs.angularjs.org/
+
+Testing
+http://karma-runner.github.io/
+http://pivotal.github.io/jasmine/
+
 System dependencies
 -------------------
 In order to run this example you must have installed:

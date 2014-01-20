@@ -1,3 +1,4 @@
+/* global module, require */
 'use strict';
 
 module.exports = function (grunt) {
@@ -38,7 +39,7 @@ module.exports = function (grunt) {
 				jshintrc: '<%= app.dir.src %>/js/.jshintrc',
 				reporter: require('jshint-stylish')
 			},
-			all: ['<%= app.dir.src %>/js/**.js']
+			all: ['<%= app.dir.src %>/js/**/*.js']
 		},
 		cssmin: {
 			options: {
@@ -98,7 +99,7 @@ module.exports = function (grunt) {
 			build: {
 				files: [{
 					expand: true,
-					cwd: '<%= app.dir.src %>', 
+					cwd: '<%= app.dir.src %>',
 					src: 'img/**/*.{gif,jpeg,jpg,png}',
 					dest: '<%= app.dir.dist %>'
 				}]
@@ -108,7 +109,7 @@ module.exports = function (grunt) {
 			build: {
 				files: [{
 					expand: true,
-					cwd: '<%= app.dir.src %>', 
+					cwd: '<%= app.dir.src %>',
 					src: 'img/**/*.svg',
 					dest: '<%= app.dir.dist %>/img'
 				}]
@@ -120,7 +121,7 @@ module.exports = function (grunt) {
 					expand: true,
 					flatten: true,
 					dest: '<%= app.dir.dist %>/img',
-					src: [ 
+					src: [
 							// add some images to copy
 					]
 				}]
@@ -135,9 +136,9 @@ module.exports = function (grunt) {
 			},
 			fonts: {
 				files: [{
-					expand: true, 
-					flatten: true, 
-					src: ['<%= app.dir.lib %>/font-awesome/fonts/*'], 
+					expand: true,
+					flatten: true,
+					src: ['<%= app.dir.lib %>/font-awesome/fonts/*'],
 					dest: '<%= app.dir.dist %>/fonts/font-awesome'
 				}, {
 					expand: true,
@@ -198,7 +199,7 @@ module.exports = function (grunt) {
 		watch: {
 			resources: {
 				files: [
-					'<%= app.dir.src %>/img/**/*.*', 
+					'<%= app.dir.src %>/img/**/*.*',
 					'<%= app.dir.src %>/fonts/**/*.*'
 				],
 				tasks: ['dist-resources-fast']
@@ -214,65 +215,91 @@ module.exports = function (grunt) {
 		},
 		requirejs: {
 			compile: {
-				options: {
-					baseUrl: "path/to/base",
-					mainConfigFile: "path/to/config.js",
-					name: "path/to/almond", // assumes a production build using almond
-					out: "path/to/optimized.js"
-				}
+				options: grunt.util._.merge(require('./src/main/grunt/js/main/config.js'), {
+					baseUrl: '<%= app.dir.src %>/js/main',
+					dir: '<%= app.dir.dist %>/js',
+					optimize: 'none',
+					modules: [
+						{
+							name: 'basic',
+							create: true,
+							include: [
+								'jquery',
+								'bootstrap',
+								'underscore'
+							]
+						},
+						{
+							name: 'common',
+							create: true,
+							include: [
+								'config',
+								'require',
+								'angular'
+							]
+						},
+						{
+							name: 'modules/home/index',
+							exclude: ['common']
+						}
+						// ,{
+						// 	name: 'modules/other',
+						// 	exclude: ['../common']
+						// }
+					]
+				})
 			}
 		},
 		karma: {
-      ci: {
-        configFile: '<%= app.dir.src %>/karma.conf.js',
-        browsers  : ['PhantomJS'],
-        singleRun : true
-      },
-      unit: { // start testing server that listens for code updates
-        autoWatch : true,
-        configFile: 'karma.conf.js',
-        singleRun : false,
-        browsers  : ['PhantomJS']
-      },
-      unitSingleRun: {
-        autoWatch : false,
-        configFile: 'karma.conf.js',
-        singleRun : true,
-        browsers  : ['PhantomJS']
-      },
-      watch: { // used in grunt watch context
-        background: true,
-        configFile: 'karma.conf.js',
-        singleRun : false,
-        browsers  : ['Chrome']
-      }
-    }
+			'phantom': {
+				configFile: '<%= app.dir.src %>/karma.conf.js',
+				browsers  : ['PhantomJS'],
+				singleRun : true
+			},
+			'phantom-watch': {
+				configFile: '<%= app.dir.src %>/karma.conf.js',
+				browsers  : ['PhantomJS'],
+				autoWatch : true,
+				singleRun : false
+			},
+			'chrome': {
+				configFile: '<%= app.dir.src %>/karma.conf.js',
+				browsers  : ['Chrome'],
+				singleRun : true
+			},
+			'chrome-watch': {
+				configFile: '<%= app.dir.src %>/karma.conf.js',
+				browsers  : ['Chrome'],
+				autoWatch : true,
+				singleRun : false
+			}
+		}
 	});
 
 	// Distribution - JavaScript
-	grunt.registerTask('js-test', ['jshint', 'qunit']);
+	grunt.registerTask('js-test', ['jshint', 'karma:phantom']);
 	grunt.registerTask('js-dev', ['concat:js_fast']);
 	grunt.registerTask('js-prod', [
-		'test-js', 		// run tests
-		'concat:js', 	// concatenate js files
+		'test-js',		// run tests
+		'concat:js',	// concatenate js files
 		'uglify'		// uglify files
 	]);
 
 	// Distribution - CSS
 	grunt.registerTask('css-dev', ['compass:dev', 'concat:css-dev', 'autoprefixer']);
 	grunt.registerTask('css-prod', [
-		'compass:prod', 	// compile compass
-		'cssmin', 			// minify additional css
-		'concat:css-prod', 	// concatenate compass css with additional css
+		'compass:prod',		// compile compass
+		'cssmin',			// minify additional css
+		'concat:css-prod',	// concatenate compass css with additional css
 		'autoprefixer'		// add apropriate prefixes to css rules
 	]);
 
 	// Distribution - Additional resources (images, fonts etc.)
 	grunt.registerTask('resources-dev', ['copy:images-dev', 'copy:additional-images', 'copy:fonts']);
 	grunt.registerTask('resources-prod', [
-		'imagemin', 				// minimize images of type png, jpg
-		'svgmin', 					// minimize svg images
-		'copy:additional-images', 	// copy additional images
+		'imagemin',					// minimize images of type png, jpg
+		'svgmin',					// minimize svg images
+		'copy:additional-images',	// copy additional images
 		'copy:fonts'				// copy fonts
 	]);
 

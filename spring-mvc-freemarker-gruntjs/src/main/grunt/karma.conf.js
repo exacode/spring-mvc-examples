@@ -1,3 +1,5 @@
+/* globals module */
+
 // Karma configuration to test application source files
 module.exports = function (config) {
 	'use strict';
@@ -10,10 +12,10 @@ module.exports = function (config) {
 				pattern: 'lib/jasmine-matchers/dist/jasmine-matchers.js',
 				included: true
 			},
-			{
-				pattern: 'js/test/modules/**/*.map',
-				included: false
-			},
+			// {
+			// 	pattern: 'js/test/modules/**/*.map',
+			// 	included: false
+			// },
 			{
 				pattern: 'js/test/modules/**/*.js',
 				included: false
@@ -22,10 +24,10 @@ module.exports = function (config) {
 				pattern: 'js/main/**/*.js',
 				included: false
 			},
-			{
-				pattern: 'js/main/**/*.map',
-				included: false
-			},
+			// {
+			// 	pattern: 'js/main/**/*.map',
+			// 	included: false
+			// },
 			{
 				pattern: 'lib/**/*.js',
 				included: false

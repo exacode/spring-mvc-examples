@@ -36,23 +36,59 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
 				<executions>
 					<execution>
 						<phase>prepare-package</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
 						<configuration>
-							<!-- Install dependencies -->
-							<executable>npm install</executable><!-- nodejs dependencies -->
-							<executable>bundle install</executable><!-- ruby dependencies -->
-							<executable>bower install</executable><!-- bower dependencies -->
-							<!-- Build web application resources -->
-							<executable>${grunt.command}</executable>
+							<target name="building">
+								<echo message="====== NPM DEPENDENCIES ======" />
+								<exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+									<arg line="/c npm config set color false"/>
+								</exec>
+								<exec executable="bash" dir="${project.basedir}" osfamily="unix" failonerror="true">
+									<arg line="npm config set color false"/>
+								</exec>
+								<exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+									<arg line="/c npm install"/>
+								</exec>
+								<exec executable="bash" dir="${project.basedir}" osfamily="unix" failonerror="true">
+									<arg line="npm install"/>
+								</exec>
+								<echo message="====== RUBY DEPENDENCIES ======" />
+								<exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+									<arg line="/c bundle install"/>
+								</exec>
+								<exec executable="bash" dir="${project.basedir}" osfamily="unix" failonerror="true">
+									<arg line="npm bundle install"/>
+								</exec>
+								<echo message="====== BOWER DEPENDENCIES ======" />
+								<exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+									<arg line="/c bower install"/>
+								</exec>
+								<exec executable="bash" dir="${project.basedir}" osfamily="unix" failonerror="true">
+									<arg line="npm bower install"/>
+								</exec>
+								<echo message="====== GRUNT: ${grunt.command} ======" />
+								<exec executable="cmd" dir="${project.basedir}" osfamily="windows" resultproperty="cmdresult">
+									<arg line="/c ${grunt.command} --no-color > grunt.status "/>
+								</exec>
+								<exec executable="bash" dir="${project.basedir}" osfamily="unix" resultproperty="cmdresult">
+									<arg line="${grunt.command} --no-color > grunt.status"/>
+								</exec>
+								<loadfile property="grunt.status" srcFile="grunt.status"/>
+								<echo>${grunt.status}</echo>
+								<delete file="grunt.status" quiet="true"/>
+								<condition property="cmdsuccess">
+									<equals arg1="${cmdresult}" arg2="0"/>
+								</condition>
+								<fail unless="cmdsuccess"/>
+							</target>
 						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

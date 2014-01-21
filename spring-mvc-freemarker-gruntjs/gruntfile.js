@@ -26,6 +26,7 @@ module.exports = function (grunt) {
 				lib: 'src/main/grunt/lib',
 				tmp: 'target/grunt/tmp',
 				dist: 'src/main/webapp/assets',
+				devdist: 'src/main/webapp/grunt',
 			},
 			path: {
 				dev: '/spring-mvc-freemarker-gruntjs',
@@ -34,7 +35,8 @@ module.exports = function (grunt) {
 		},
 		clean: {
 			dist: ['<%= app.dir.dist %>'],
-			tmp: ['<%= app.dir.tmp %>']
+			tmp: ['<%= app.dir.tmp %>'],
+			devdist: ['<%= app.dir.devdist %>']
 		},
 		jshint: {
 			options: {
@@ -153,7 +155,7 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					cwd: '<%= app.dir.lib %>',
-					dest: 'src/main/webapp/grunt/lib',
+					dest: '<%= app.dir.devdist %>/lib',
 					src: ['**/*.js']
 				}]
 			}
@@ -163,7 +165,7 @@ module.exports = function (grunt) {
 				files: [{
 					cwd: 'src/main/grunt/js',
 					src: '**/*.js',
-					dest: 'src/main/webapp/grunt/js',
+					dest: '<%= app.dir.devdist %>/js',
 				}]
 			}
 		},

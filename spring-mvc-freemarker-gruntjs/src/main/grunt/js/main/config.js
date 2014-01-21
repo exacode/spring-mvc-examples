@@ -12,7 +12,7 @@ define({
 		// Common module dependencies
 		'domReady': '../../lib/requirejs-domready/domReady',
 		'angular': '../../lib/angular/angular',
-		'underscore': '../../lib/underscore/underscore',
+		'lodash': '../../lib/lodash/dist/lodash',
 		// Additional dependencies
 		'angular-resource': '../../lib/angular-resource/angular-resource'
 	},
@@ -22,9 +22,6 @@ define({
 			exports: 'angular'
 		},
 		'angular-resource': ['angular'],
-		'underscore': {
-			exports: 'underscore'
-		},
 		"bootstrap": {
 			deps: ["jquery"],
 			exports: "$.fn.popover"

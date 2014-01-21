@@ -25,8 +25,12 @@ define({
 		'underscore': {
 			exports: 'underscore'
 		},
+		"bootstrap": {
+			deps: ["jquery"],
+			exports: "$.fn.popover"
+		}
 	},
 
-	baseUrl: 'assets/js'
+	baseUrl: 'grunt/js/main'
 
 });

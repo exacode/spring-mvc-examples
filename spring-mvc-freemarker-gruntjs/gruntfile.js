@@ -88,17 +88,9 @@ module.exports = function (grunt) {
 			}
 		},
 		uglify: {
-			options: {
-				banner: '<%= banner %>',
-				report: 'min'
-			},
-			build: {
-				src: ['<%= app.dir.dist %>/js/main.js'],
-				dest: '<%= app.dir.dist %>/js/main.min.js'
-			},
 			libs: {
 				src: ['<%= app.dir.lib %>/requirejs/require.js'],
-				dest: '<%= app.dir.dist %>/js/require.js'
+				dest: '<%= app.dir.dist %>/lib/require.js'
 			}
 		},
 		imagemin: {
@@ -157,11 +149,22 @@ module.exports = function (grunt) {
 					]
 				}]
 			},
-			'js-libs': {
-				expand: true,
-				flatten: true,
-				src: ['<%= app.dir.lib %>/requirejs/require.js'],
-				dest: '<%= app.dir.dist %>/js'
+			'js-libs-dev': {
+				files: [{
+					expand: true,
+					cwd: '<%= app.dir.lib %>',
+					dest: 'src/main/webapp/grunt/lib',
+					src: ['**/*.js']
+				}]
+			}
+		},
+		sync: {
+			js: {
+				files: [{
+					cwd: 'src/main/grunt/js',
+					src: '**/*.js',
+					dest: 'src/main/webapp/grunt/js',
+				}]
 			}
 		},
 		autoprefixer: {
@@ -219,23 +222,15 @@ module.exports = function (grunt) {
 				dir: '<%= app.dir.dist %>/js',
 				shim: requireJsConfig.shim,
 				paths: requireJsConfig.paths,
+				uglify: {
+					no_mangle: true
+				},
 				modules: [
 					{
-						name: 'basic',
-						create: true,
-						include: [
-							'jquery',
-							'bootstrap'
-						]
+						name: 'basic'
 					},
 					{
-						name: 'common',
-						create: true,
-						include: [
-							'domReady',
-							'angular',
-							'underscore'
-						]
+						name: 'common'
 					},
 					{
 						name: 'modules/home/loader',
@@ -301,7 +296,7 @@ module.exports = function (grunt) {
 					'<%= app.dir.src %>/js/main/**/*.js',
 					'<%= app.dir.src %>/js/*.js'
 				],
-				tasks: ['js-dev']
+				tasks: ['sync:js']
 			}
 		}
 	});
@@ -312,11 +307,11 @@ module.exports = function (grunt) {
 
 	// Distribution - JavaScript
 	grunt.registerTask('js-test', ['jshint', 'karma:phantom']);
-	grunt.registerTask('js-dev', ['requirejs:dev', 'copy:js-libs']);
+	grunt.registerTask('js-dev', ['sync:js', 'copy:js-libs-dev']);
 	grunt.registerTask('js-prod', [
-		'js-test',		// run tests
+		'js-test',			// run tests
 		'requirejs:prod',	// build optimized requirejs modules
-		'uglify:libs',	// concatenate and uglify additiona libs
+		'uglify:libs',		// concatenate and uglify additiona libs
 	]);
 
 
@@ -332,7 +327,7 @@ module.exports = function (grunt) {
 	// Distribution - Additional resources (images, fonts etc.)
 	grunt.registerTask('resources-dev', ['copy:images-dev', 'copy:additional-images', 'copy:fonts']);
 	grunt.registerTask('resources-prod', [
-		'imagemin',					// minimize images of type png, jpg
+		'imagemin',					// minimize images of type png, jpg, gif
 		'svgmin',					// minimize svg images
 		'copy:additional-images',	// copy additional images
 		'copy:fonts'				// copy fonts
@@ -343,7 +338,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('build-dev', ['css-dev', 'resources-dev', 'js-dev']);
 
 	// Development
-	grunt.registerTask('dev', ['watch']);
+	grunt.registerTask('dev', ['build-dev', 'watch']);
 
 	// Default task.
 	grunt.registerTask('default', ['clean', 'build-prod']);

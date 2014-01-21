@@ -10,6 +10,7 @@ Parent project: [spring-mvc-examples](../../../)
 Project structure
 https://github.com/StarterSquad/angularjs-requirejs-seed
 https://github.com/requirejs/example-multipage-shim
+https://github.com/robdodson/requirejs-multipage-shim-boilerplate
 http://docs.angularjs.org/
 
 Testing

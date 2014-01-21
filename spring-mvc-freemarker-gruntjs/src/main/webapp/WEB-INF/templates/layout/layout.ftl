@@ -23,20 +23,38 @@
 			<#nested>
 			<#include "/layout/footer.ftl">
 
-			<script src="${furl('/assets/js/require.js')}"></script>
-			<script>
-				<#if ngApp?has_content>
-					require([
-						"require",
-						"${furl('/assets/js/basic.js')}",
-						"${furl('/assets/js/common.js')}"
-					], function (require) {
-		                require(["${furl('/assets/js/modules/${ngApp}/loader.js')}"]);
-		            });
-		        <#else>
-					require(["${furl('/assets/js/basic.js')}"]);
-	            </#if>
-            </script>
+			<#if environment='production'>
+				<script src="${furl('/assets/lib/require.js')}"></script>
+				<script>
+					<#if ngApp?has_content>
+						require([
+							"require",
+							"${furl('/assets/js/basic.js')}",
+							"${furl('/assets/js/common.js')}"
+						], function (require) {
+							require(["${furl('/assets/js/modules/${ngApp}/loader.js')}"]);
+						});
+					<#else>
+						require(["${furl('/assets/js/basic.js')}"]);
+					</#if>
+				</script>
+			<#else>
+				<script src="${furl('/grunt/lib/requirejs/require.js')}"></script>
+				<script>
+					<#if ngApp?has_content>
+						require([
+							"require",
+							"${furl('/grunt/js/main/config.js')}"
+						], function (require, config) {
+							window.require.config(config);
+							require(["${furl('/grunt/js/main/basic.js')}"]);
+			                require(["${furl('/grunt/js/main/modules/${ngApp}/loader.js')}"]);
+			            });
+			         <#else>
+						require(["${furl('/grunt/js/main/basic.js')}"]);
+		            </#if>
+	            </script>
+			</#if>
 		</body>
 	</html>
 </#macro>

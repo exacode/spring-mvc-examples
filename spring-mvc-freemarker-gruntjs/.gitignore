@@ -11,3 +11,4 @@ node_modules
 Gemfile.lock
 src/main/grunt/lib
 src/main/webapp/assets
+src/main/webapp/grunt

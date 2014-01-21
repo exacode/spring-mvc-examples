@@ -13,9 +13,9 @@
 		<artifactId>spring-mvc-examples</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<properties>
-		<grunt.command>grunt</grunt.command>
+		<grunt.command>grunt build-dev</grunt.command>
 	</properties>
 
 	<dependencies>
@@ -69,7 +69,7 @@
 				</property>
 			</activation>
 			<properties>
-				<grunt.command>grunt optimized</grunt.command>
+				<grunt.command>grunt build-prod</grunt.command>
 			</properties>
 		</profile>
 	</profiles>

@@ -1,4 +1,4 @@
-/* global module, require */
+/* global module, require, __dirname */
 'use strict';
 
 module.exports = function (grunt) {
@@ -180,17 +180,18 @@ module.exports = function (grunt) {
 		compass: {
 			options: {
 				// define input directories
-				importPath: '<%= app.dir.lib %>',		// where to search when using '@import'
+				importPath: '<%= app.dir.lib %>',			// where to search when using '@import'
 				sassDir: '<%= app.dir.src %>/scss',		// where are .scss fiels?
-				imagesDir: '<%= app.dir.src %>/img',	// where are images? ...handy when generating sprites
-				fontsDir: '<%= app.dir.src %>/fonts',	// where are all fonts
+				imagesDir: '<%= app.dir.src %>/img',		// where are images? ...handy when generating sprites
+				fontsDir: '<%= app.dir.src %>/fonts',		// where are all fonts
 				// define outout directories
 				generatedImagesDir: '<%= app.dir.dist %>/img/generated',	// where to put generated images? e.g. sprites
-				cssDir: '<%= app.dir.tmp %>/scss',	// where to put generated css?
+				generatedImagesPath: '<%= app.dir.dist %>/img/generated',	// where to put generated images? e.g. sprites
+				cssDir: '<%= app.dir.tmp %>/scss',			// where to put generated css?
 				// define build parameters
 				trace: true,
-				relativeAssets: true,
-				raw: "cache_path = '<%= app.dir.tmp %>/scss/cache'\n"
+				raw: "cache_path = '<%= app.dir.tmp %>/scss/cache'\n",	// because of this option we need to add "__dirname" prefixes
+				basePath: __dirname.replace(/\\/gi, "/")
 			},
 			dev: {
 				options: {
